@@ -31,6 +31,13 @@ export default function Navbar() {
         </Link>
       </header>
 
+      {/* Firma digital */}
+      <div className="fixed bottom-16 inset-x-0 z-40 flex justify-center pointer-events-none">
+        <span className="text-[10px] text-gray-400 dark:text-gray-600 tracking-widest font-medium px-3 py-0.5">
+          ✦ Profe Leo · LAAT ✦
+        </span>
+      </div>
+
       {/* Bottom navigation (mobile-first) */}
       <nav className="fixed bottom-0 inset-x-0 z-50 h-16 flex items-center justify-around
                       bg-white/90 dark:bg-[#0f0f1a]/90 backdrop-blur-md border-t
