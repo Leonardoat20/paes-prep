@@ -3,6 +3,10 @@
   "appName": "PAES Prep",
   "webDir": "dist",
   "bundledWebRuntime": false,
+  "server": {
+    "url": "https://paes-prep-phi.vercel.app",
+    "cleartext": false
+  },
   "android": {
     "backgroundColor": "#0f0f1a",
     "allowMixedContent": true

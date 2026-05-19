@@ -11,16 +11,21 @@ export function useTimer({ initialSeconds, onExpire, autoStart = false }: UseTim
   const [running, setRunning] = useState(autoStart)
   const [elapsed, setElapsed] = useState(0)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const startTimeRef = useRef<number>(Date.now())
+  const onExpireRef = useRef(onExpire)
+
+  // Mantener ref actualizada sin reiniciar el timer
+  useEffect(() => { onExpireRef.current = onExpire }, [onExpire])
 
   const clear = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current)
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
   }, [])
 
   useEffect(() => {
     if (!running) { clear(); return }
 
-    startTimeRef.current = Date.now() - elapsed * 1000
     intervalRef.current = setInterval(() => {
       setRemaining(prev => {
         const next = prev - 1
@@ -28,7 +33,7 @@ export function useTimer({ initialSeconds, onExpire, autoStart = false }: UseTim
         if (next <= 0) {
           clear()
           setRunning(false)
-          onExpire?.()
+          onExpireRef.current?.()
           return 0
         }
         return next
@@ -36,7 +41,7 @@ export function useTimer({ initialSeconds, onExpire, autoStart = false }: UseTim
     }, 1000)
 
     return clear
-  }, [running, clear, onExpire])
+  }, [running, clear])
 
   const start  = useCallback(() => setRunning(true), [])
   const pause  = useCallback(() => setRunning(false), [])
