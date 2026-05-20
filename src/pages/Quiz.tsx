@@ -9,13 +9,14 @@ import QuestionCard from '@/components/quiz/QuestionCard'
 import QuizTimer from '@/components/quiz/QuizTimer'
 import ProgressBar from '@/components/quiz/ProgressBar'
 import { calcularResultado } from '@/utils/scoring'
+import { submitScore } from '@/lib/supabase'
 
 export default function Quiz() {
   const { subject } = useParams<{ subject: string }>()
   const navigate = useNavigate()
   const { session, currentIndex, showExplanation, isFinished,
           answer, next, prev, skip, toggleExplanation, finishSession, reset } = useQuizStore()
-  const { addResult, checkAchievements, stats } = useAppStore()
+  const { addResult, checkAchievements, stats, profile } = useAppStore()
 
   const cfg = subject ? SUBJECTS_CONFIG[subject as keyof typeof SUBJECTS_CONFIG] : null
   const tiempoTotal = cfg ? cfg.tiempoEnsayo * 60 : 7200
@@ -38,10 +39,24 @@ export default function Quiz() {
       const resultado = calcularResultado(session)
       addResult(resultado)
       const newAchievements = checkAchievements()
+
+      // Enviar puntaje al ranking global (Supabase)
+      submitScore({
+        nombre: profile.nombre || 'Estudiante',
+        colegio: profile.colegio || '',
+        asignatura: session.asignatura,
+        puntaje_paes: resultado.puntajePaes,
+        nota: resultado.nota,
+        correctas: resultado.correctas,
+        total: resultado.totalPreguntas,
+        porcentaje: resultado.porcentajeLogro,
+        fecha: new Date().toLocaleDateString('es-CL'),
+      })
+
       navigate(`/results/${session.id}`, { state: { resultado, newAchievements } })
       reset()
     }
-  }, [isFinished, session, addResult, checkAchievements, navigate, reset])
+  }, [isFinished, session, addResult, checkAchievements, navigate, reset, profile])
 
   const handleAnswer = useCallback((respuesta: string) => {
     if (!session) return

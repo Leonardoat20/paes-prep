@@ -1,14 +1,14 @@
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Home, BarChart2, User, Trophy, Settings, BookOpen } from 'lucide-react'
+import { Home, BarChart2, User, Trophy, Settings, BookOpen, Medal } from 'lucide-react'
 import { useAppStore } from '@/context/AppStore'
 import clsx from 'clsx'
 
 const links = [
   { to: '/',            icon: Home,     label: 'Inicio'    },
   { to: '/subjects',   icon: BookOpen,  label: 'Ensayar'   },
-  { to: '/stats',      icon: BarChart2, label: 'Estadísticas' },
-  { to: '/achievements', icon: Trophy,  label: 'Logros'    },
+  { to: '/ranking',    icon: Medal,     label: 'Ranking'   },
+  { to: '/stats',      icon: BarChart2, label: 'Stats'     },
   { to: '/profile',    icon: User,      label: 'Perfil'    },
 ]
 

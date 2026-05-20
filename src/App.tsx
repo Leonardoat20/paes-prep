@@ -11,6 +11,8 @@ import Stats        from '@/pages/Stats'
 import Profile      from '@/pages/Profile'
 import Achievements from '@/pages/Achievements'
 import Settings     from '@/pages/Settings'
+import Ranking      from '@/pages/Ranking'
+import Admin        from '@/pages/Admin'
 import { useAppStore } from '@/context/AppStore'
 
 // Rutas donde NO se muestra la navbar
@@ -34,6 +36,8 @@ function AppRoutes() {
           <Route path="/profile"         element={<Profile />} />
           <Route path="/achievements"    element={<Achievements />} />
           <Route path="/settings"        element={<Settings />} />
+          <Route path="/ranking"         element={<Ranking />} />
+          <Route path="/admin"           element={<Admin />} />
         </Routes>
       </AnimatePresence>
     </>
