@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Home, BarChart2, User, Trophy, Settings, BookOpen, Medal } from 'lucide-react'
+import { Home, BarChart2, User, Settings, BookOpen, Medal } from 'lucide-react'
 import { useAppStore } from '@/context/AppStore'
 import clsx from 'clsx'
 

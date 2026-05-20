@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Lock, RefreshCw, Download, Search, Shield, Users, TrendingUp, BarChart2, Trash2 } from 'lucide-react'
+import { Lock, RefreshCw, Download, Search, Shield, Users, TrendingUp, BarChart2 } from 'lucide-react'
 import { getAllScores, type ScoreRecord } from '@/lib/supabase'
 import { SUBJECTS_CONFIG } from '@/context/AppStore'
 import clsx from 'clsx'
