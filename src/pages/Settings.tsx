@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion'
-import { Moon, Sun, Volume2, VolumeX, Music, Bell, BellOff, Trash2, Info } from 'lucide-react'
+import { Moon, Sun, Volume2, VolumeX, Music, Bell, BellOff, Trash2, Info, Shield } from 'lucide-react'
 import { useAppStore } from '@/context/AppStore'
+import { useNavigate } from 'react-router-dom'
 
 export default function Settings() {
   const { config, setConfig, stats } = useAppStore()
+  const navigate = useNavigate()
 
   const Toggle = ({ on, onToggle, iconOn: IconOn, iconOff: IconOff, label, desc }: {
     on: boolean; onToggle: () => void;
@@ -110,6 +112,18 @@ export default function Settings() {
             <p>Preguntas practicadas: {stats.totalPreguntas}</p>
             <p className="text-xs mt-2">Las preguntas están basadas en los modelos oficiales PAES publicados por el DEMRE.</p>
           </div>
+        </div>
+
+        {/* Acceso Profesor */}
+        <div className="card p-5 mb-4">
+          <p className="font-semibold mb-3 flex items-center gap-2"><Shield size={16} className="text-purple-500" /> Zona Profesor</p>
+          <button
+            onClick={() => navigate('/admin')}
+            className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold text-sm shadow-lg shadow-purple-500/20"
+          >
+            <Shield size={16} /> Panel de Administrador
+          </button>
+          <p className="text-xs text-gray-400 mt-2 text-center">Acceso con contraseña — solo para el profesor</p>
         </div>
 
         {/* Zona de peligro */}

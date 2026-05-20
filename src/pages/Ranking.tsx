@@ -51,28 +51,31 @@ export default function Ranking() {
         </div>
 
         {/* Filtro por asignatura */}
-        <div className="flex gap-2 overflow-x-auto pb-2 mb-4">
-          <button
-            onClick={() => setFiltroAsignatura('todas')}
-            className={clsx('px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all',
-              filtroAsignatura === 'todas'
-                ? 'bg-primary-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400')}
-          >
-            Todas
-          </button>
-          {Object.entries(SUBJECTS_CONFIG).map(([key, cfg]) => (
+        <div className="mb-4">
+          <p className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Filtrar por asignatura</p>
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
             <button
-              key={key}
-              onClick={() => setFiltroAsignatura(key)}
-              className={clsx('px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all',
-                filtroAsignatura === key
-                  ? 'bg-primary-500 text-white'
+              onClick={() => setFiltroAsignatura('todas')}
+              className={clsx('px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex-shrink-0',
+                filtroAsignatura === 'todas'
+                  ? 'bg-primary-500 text-white shadow-md shadow-primary-500/30'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400')}
             >
-              {cfg.iconEmoji} {SUBJECT_NAMES[key]}
+              🌟 Todas
             </button>
-          ))}
+            {Object.entries(SUBJECTS_CONFIG).map(([key, cfg]) => (
+              <button
+                key={key}
+                onClick={() => setFiltroAsignatura(key)}
+                className={clsx('px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex-shrink-0',
+                  filtroAsignatura === key
+                    ? 'bg-primary-500 text-white shadow-md shadow-primary-500/30'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400')}
+              >
+                {cfg.iconEmoji} {SUBJECT_NAMES[key]}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Botón actualizar */}
